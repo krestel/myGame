@@ -1,0 +1,27 @@
+/* Jill Rhoads */
+
+.box {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: large;
+    font-weight: bold;
+}
+
+#opt1 {
+    background-color: red;
+}
+
+#opt2 {
+    background-color: blue;
+}
+
+#opt3 {
+    background-color: green;
+}
+
+#opt4 {
+    background-color: yellow;
+}
