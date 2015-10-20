@@ -1,16 +1,45 @@
 // Jill Rhoads
-$(document).ready(function () {
 
+var questionObject = {
+    questionString: "A, B, C eller D?",
+    questionAnswers: ["A", "B", "C", "D"],
+    correctAnswer: 3
+}
 
-    var questionObject = {
+// questionObject Array
+var qObjArr = [{
         questionString: "A, B, C eller D?",
         questionAnswers: ["A", "B", "C", "D"],
         correctAnswer: 3
+    }, {
+        questionString: "1, 2, 3 eller 4?",
+        questionAnswers: ["1", "2", "3", "4"],
+        correctAnswer: 1
     }
+                  ]
+$(document).ready(function () {
 
-    showQuestion(questionObject);
+
+//    var questionObject = {
+        //        questionString: "A, B, C eller D?",
+        //        questionAnswers: ["A", "B", "C", "D"],
+        //        correctAnswer: 3
+        //    }
+        //
+        //    // questionObject Array
+        //    var qObjArr = [{
+        //            questionString: "A, B, C eller D?",
+        //            questionAnswers: ["A", "B", "C", "D"],
+        //            correctAnswer: 3
+        //    }, {
+        //            questionString: "1, 2, 3 eller 4?",
+        //            questionAnswers: ["1", "2", "3", "4"],
+        //            correctAnswer: 1
+        //    }
+        //                  ]
+    // showQuestion(questionObject);
     //createClickEvent(questionObject);
-    changeBlocks(questionObject);
+    //changeBlocks(questionObject);
 });
 
 
