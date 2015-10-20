@@ -1,51 +1,19 @@
 // Jill Rhoads
 $(document).ready(function () {
-    var questionObject = getQuestions();
 
-    console.log(questionObject);
 
-    //    var questionObject = {
-    //        questionString: "A, B, C eller D?",
-    //        questionAnswers: ["A", "B", "C", "D"],
-    //        correctAnswer: 3
-    //    }
-
-    //showQuestion(questionObject);
-    //createClickEvent(questionObject);
-    //changeBlocks(questionObject);
-});
-
-// gets data from .json file 
-function getQuestions() {
-
-    // Get the questions
-    var xmlhttp = new XMLHttpRequest();
-    //var url = "http://127.0.0.1:63391/questions.json" // localhost for brackets 
-    var url = "questions.json";
-
-    // Setting up the call to get the .json file that has all the info about the questions
-    // This is really a framework called AJAX at work here
-    xmlhttp.onreadystatechange = function () { // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //myFunction(xmlhttp.responseText); // responseText: the response text as a string
-            returnQuestions(xmlhttp.responseText);
-            console.log("json file loaded");
-        } else if (xmlhttp.status == 404) {
-            console.log("ERROR: json file not found");
-        }
+    var questionObject = {
+        questionString: "A, B, C eller D?",
+        questionAnswers: ["A", "B", "C", "D"],
+        correctAnswer: 3
     }
 
-    xmlhttp.open("GET", url, true); // a simple GET request 
-    xmlhttp.send(); // Sends the above request to the server
+    showQuestion(questionObject);
+    //createClickEvent(questionObject);
+    changeBlocks(questionObject);
+});
 
 
-
-}
-
-function returnQuestions(response) {
-    questionObject = JSON.parse(response);
-    //console.log(localQuestionObject[0].questionString);
-}
 
 function showQuestion(options) {
     // print out the question itself
