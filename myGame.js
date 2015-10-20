@@ -1,8 +1,11 @@
 // Jill Rhoads
 $(document).ready(function () {
-    var questionObject = getQuestions();
 
-    console.log(questionObject);
+    questionObjectArr = getQuestions();
+
+
+
+    console.log(questionObjectArr);
 
     //    var questionObject = {
     //        questionString: "A, B, C eller D?",
@@ -28,7 +31,11 @@ function getQuestions() {
     xmlhttp.onreadystatechange = function () { // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             //myFunction(xmlhttp.responseText); // responseText: the response text as a string
-            returnQuestions(xmlhttp.responseText);
+            return xmlhttp.responseText;
+            //console.log(xmlhttp.responseText);
+            //            questionObjectArr = JSON.parse(xmlhttp.responseText);
+            //            console.log(questionObjectArr[0].questionString);
+
             console.log("json file loaded");
         } else if (xmlhttp.status == 404) {
             console.log("ERROR: json file not found");
@@ -38,14 +45,14 @@ function getQuestions() {
     xmlhttp.open("GET", url, true); // a simple GET request 
     xmlhttp.send(); // Sends the above request to the server
 
-
+    //    return xmlhttp.responseText;
 
 }
 
-function returnQuestions(response) {
-    questionObject = JSON.parse(response);
-    //console.log(localQuestionObject[0].questionString);
-}
+//function returnQuestions(response) {
+//    questionObject = JSON.parse(response);
+//    //console.log(localQuestionObject[0].questionString);
+//}
 
 function showQuestion(options) {
     // print out the question itself
