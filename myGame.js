@@ -1,11 +1,14 @@
 // Jill Rhoads
+
+var qObjArr = [];
+
 $(document).ready(function () {
 
-    questionObjectArr = getQuestions();
+    qObjArr = getQuestions();
 
 
 
-    console.log(questionObjectArr);
+    //console.log(questionObjectArr);
 
     //    var questionObject = {
     //        questionString: "A, B, C eller D?",
@@ -31,8 +34,8 @@ function getQuestions() {
     xmlhttp.onreadystatechange = function () { // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             //myFunction(xmlhttp.responseText); // responseText: the response text as a string
-            return xmlhttp.responseText;
-            //console.log(xmlhttp.responseText);
+
+            console.log(JSON.parse(xmlhttp.responseText)[0]);
             //            questionObjectArr = JSON.parse(xmlhttp.responseText);
             //            console.log(questionObjectArr[0].questionString);
 
