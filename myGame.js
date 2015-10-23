@@ -1,58 +1,65 @@
 // Jill Rhoads
+var qObjArr = [{
+        "questionString": "A, B, C eller D?",
+        "questionAnswers": ["A", "B", "C", "D"],
+        "correctAnswer": 3
+        },
+    {
+        "questionString": "1, 2, 3, eller 4?",
+        "questionAnswers": ["1", "2", "3", "4"],
+        "correctAnswer": 1
+
+        }]
+
+var currentQuestion = 0;
+
 $(document).ready(function () {
+    console.log("starting");
+    currentQuestion++;
 
+    showQuestion(qObjArr[currentQuestion]);
 
-    var questionObject = {
-        questionString: "A, B, C eller D?",
-        questionAnswers: ["A", "B", "C", "D"],
-        correctAnswer: 3
-    }
-
-    showQuestion(questionObject);
+    console.log("done");
+    // showQuestion(questionObject);
     //createClickEvent(questionObject);
-    changeBlocks(questionObject);
+    //changeBlocks(questionObject);
 });
 
 
 
-function showQuestion(options) {
+function showQuestion(dataObj) {
     // print out the question itself
-    $("#questionText").html(options.questionString);
+    $("#questionText").html(dataObj.questionString);
 
     // Create options html
-    var length = options.questionAnswers.length;
+    var length = dataObj.questionAnswers.length;
 
     for (i = 0; i < length; i++) {
+
         // creates for each possible answer: <div id="optX" class="box">Answer</div>
         var optionsHtml = document.createElement("div");
-        optionsHtml.innerHTML = options.questionAnswers[i];
+        optionsHtml.innerHTML = dataObj.questionAnswers[i];
         optionsHtml.setAttribute("class", "box");
         optionsHtml.setAttribute("id", "opt" + (i + 1));
         $("#options").append(optionsHtml);
 
-        // bind function to clicking on block
-        //$("#opt" + (i + 1)).click(myLog());
-
         $("#options").append("\n"); // seems to keep the boxes from touching each other
 
+        // bind a click to something
+        $("#opt" + (i + 1)).on("click", fadeBoxes);
     }
 }
 
-function myLog() {
-    console.log("aj");
+// fade all the boxes except the one you clicked on
+function fadeBoxes(e) {
+    var length = qObjArr[currentQuestion].questionAnswers.length;
+
+    for (var i = 0; i <= length; i++) {
+        if (e.target.id != ("opt" + i)) {
+            $("#opt" + i).fadeTo("slow", 0.4);
+        }
+    };
 }
 
-function changeBlocks(options) {
-
-    var length = options.questionAnswers.length;
-
-    for (i = 0; i < length; i++) {
-
-        $("#opt1").click(function () {
-            $("#opt1").fadeTo("slow", 0.4);
-            $("#opt2").fadeTo("slow", 0.4);
-            $("#opt3").fadeTo("slow", 0.4);
-            $("#opt4").fadeTo("slow", 0.4);
-        });
-    }
-}
+// gah..can't get the opts to be equal to one another
+//if (e.target.id != ("opt" + qObjArr[currentQuestion].correctAnswer)) {
