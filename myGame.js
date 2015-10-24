@@ -15,6 +15,7 @@ var qObj = ""; // a temporary object to make the code more readable
 
 var pointsCorrect = 0;
 
+var myTime;
 
 $(document).ready(function () {
     qObj = qObjArr.shift(); // set the object to a question
@@ -44,6 +45,12 @@ function showQuestion(dataObj) {
         // bind a click to something
         $("#opt" + (i + 1)).on("click", fadeBoxes);
     }
+
+    myTime = setTimeout(countdown, 3000);
+}
+
+function countdown() {
+    alert("Times up");
 }
 
 // fade all the boxes except the one you clicked on
@@ -64,6 +71,8 @@ function showCorrectAns(e) {
         pointsCorrect++;
         console.log("Correct Answer");
     }
+
+    clearTimeout(myTime);
 
     console.log("Points: " + pointsCorrect)
 }
