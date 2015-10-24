@@ -13,12 +13,11 @@ var qObjArr = [{
 
 var qObj = ""; // a temporary object to make the code more readable
 
-var currentQuestion = 0;
+var pointsCorrect = 0;
 
 
 $(document).ready(function () {
-    currentQuestion++;
-    qObj = qObjArr[currentQuestion]; // set the object to a question
+    qObj = qObjArr.shift(); // set the object to a question
     showQuestion(qObj);
 });
 
@@ -57,11 +56,16 @@ function fadeBoxes(e) {
         }
     };
 
-    setTimeout(myFunction, 1000);
+    setTimeout(showCorrectAns(e), 1000);
 }
 
-function myFunction() {
-    console.log("myFunction called");
+function showCorrectAns(e) {
+    if (e.target.id == ("opt" + qObj.correctAnswer)) {
+        pointsCorrect++;
+        console.log("Correct Answer");
+    }
+
+    console.log("Points: " + pointsCorrect)
 }
 
 // gah..can't get the opts to be equal to one another
