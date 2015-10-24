@@ -11,27 +11,24 @@ var qObjArr = [{
 
         }]
 
+var qObj = ""; // a temporary object to make the code more readable
+
 var currentQuestion = 0;
 
+
 $(document).ready(function () {
-    console.log("starting");
     currentQuestion++;
-
-    showQuestion(qObjArr[currentQuestion]);
-
-    console.log("done");
-    // showQuestion(questionObject);
-    //createClickEvent(questionObject);
-    //changeBlocks(questionObject);
+    qObj = qObjArr[currentQuestion]; // set the object to a question
+    showQuestion(qObj);
 });
 
 
-
+// creates the HTML for the question
 function showQuestion(dataObj) {
     // print out the question itself
     $("#questionText").html(dataObj.questionString);
 
-    // Create options html
+    // Create the multiple choice options html
     var length = dataObj.questionAnswers.length;
 
     for (i = 0; i < length; i++) {
@@ -52,13 +49,19 @@ function showQuestion(dataObj) {
 
 // fade all the boxes except the one you clicked on
 function fadeBoxes(e) {
-    var length = qObjArr[currentQuestion].questionAnswers.length;
+    var length = qObj.questionAnswers.length;
 
     for (var i = 0; i <= length; i++) {
         if (e.target.id != ("opt" + i)) {
             $("#opt" + i).fadeTo("slow", 0.4);
         }
     };
+
+    setTimeout(myFunction, 1000);
+}
+
+function myFunction() {
+    console.log("myFunction called");
 }
 
 // gah..can't get the opts to be equal to one another
