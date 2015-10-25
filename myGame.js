@@ -73,7 +73,6 @@ function showCorrectAns(e) {
     }
 
     clearTimeout(myTime);
-
     console.log("Points: " + pointsCorrect)
 }
 
