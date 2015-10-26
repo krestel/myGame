@@ -18,8 +18,13 @@ var pointsCorrect = 0;
 var myTime;
 
 $(document).ready(function () {
+
+    //while (qObjArr.length) {
     qObj = qObjArr.shift(); // set the object to a question
+    qObj = qObjArr.shift();
     showQuestion(qObj);
+
+    // console.log("end of game")
 });
 
 
@@ -50,11 +55,15 @@ function showQuestion(dataObj) {
 }
 
 function countdown() {
-    alert("Times up");
+    console.log("Times up");
+    showCorrectAns();
 }
+
 
 // fade all the boxes except the one you clicked on
 function fadeBoxes(e) {
+    clearTimeout(myTime); // stop the question timer
+
     var length = qObj.questionAnswers.length;
 
     for (var i = 0; i <= length; i++) {
@@ -63,19 +72,35 @@ function fadeBoxes(e) {
         }
     };
 
-    setTimeout(showCorrectAns(e), 1000);
+    setTimeout(showCorrectAns, 3000, e);
 }
 
 function showCorrectAns(e) {
-    if (e.target.id == ("opt" + qObj.correctAnswer)) {
-        pointsCorrect++;
-        console.log("Correct Answer");
-    }
 
-    clearTimeout(myTime);
+    try {
+        if (e.target.id == ("opt" + qObj.correctAnswer)) { //should really use a try/catch here - the user may not have chosen anything
+            pointsCorrect++;
+        }
+    } catch (err) {} //the user may never have clicked anything
+
+    var length = qObj.questionAnswers.length;
+
+    // change the incorrect boxes color to red and fade into background
+    for (var i = 0; i <= length; i++) {
+        if (i != qObj.correctAnswer) {
+            $("#opt" + i).fadeTo(800, 0.2);
+            $("#opt" + i).animate({
+                backgroundColor: 'red'
+            });
+
+        }
+    };
+
+    // change the correct answer to green and let it fade forward
+    $("#opt" + qObj.correctAnswer).animate({
+        backgroundColor: 'green'
+    });
+    $("#opt" + qObj.correctAnswer).fadeTo(800, 1);
 
     console.log("Points: " + pointsCorrect)
 }
-
-// gah..can't get the opts to be equal to one another
-//if (e.target.id != ("opt" + qObjArr[currentQuestion].correctAnswer)) {
