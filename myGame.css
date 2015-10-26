@@ -1,5 +1,9 @@
 /* Jill Rhoads */
 
+body {
+    background-color: #F2F2F2;
+}
+
 .box {
     display: inline-block;
     width: 80px;
@@ -24,4 +28,61 @@
 
 #opt4 {
     background-color: blue;
+}
+
+.graphPaper {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAG0lEQVQIW2OMq7zlw4ADMIIkF7WrbcEmP+gkAarWGgXyq5CNAAAAAElFTkSuQmCC
+) repeat;
+}
+
+.questionContainer {
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    padding: 10px;
+    border: 5px solid cadetblue;
+    background-color: powderblue;
+}
+
+#questionText {
+    background-color: ghostwhite;
+    border-radius: 25px;
+    border: 5px solid lightgrey;
+    padding: 20px;
+    width: 100%;
+}
+
+#options {
+    border-radius: 25px;
+    border: 5px solid;
+    border-color: cadetblue;
+    padding: 20px;
+    width: 100%;
+    background-color: ghostwhite;
+}
+
+.myFooter {
+    margin-top: 10px;
+    border-radius: 25px;
+    border: 5px solid lightgrey;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: white;
+}
+
+.pager,
+.pagination {
+    margin: 5px;
+}
+
+.pagination>li>a {
+    /*    background-color: blue;*/
+}
+
+.pagination>li.correctAns>a {
+    background-color: greenyellow!important;
+}
+
+.pagination>li.wrongAns>a {
+    background-color: palevioletred!important;
 }

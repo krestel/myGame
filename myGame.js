@@ -98,7 +98,7 @@ function showCorrectAns(e) {
 
     // change the correct answer to green and let it fade forward
     $("#opt" + qObj.correctAnswer).animate({
-        backgroundColor: 'green'
+        backgroundColor: '#47DC4C'
     });
     $("#opt" + qObj.correctAnswer).fadeTo(800, 1);
 
