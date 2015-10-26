@@ -41,12 +41,16 @@
     <![endif]-->
 
     <!-- Start coding here -->
-
+    <!-- START: page container -->
     <div class="container">
-        <!-- <button>Click me</button> -->
-        <p id="questionText"></p>
-        <div id="options"></div>
-        <!--
+        <div class="page-header">
+            <h2 class="text-info">myGame</h2>
+        </div>
+        <div class="questionContainer graphPaper">
+            <!-- <button>Click me</button> -->
+            <p id="questionText"></p>
+            <div id="options"></div>
+            <!--
         <br>
         <br>
         <p>A, B, C or D?</p>
@@ -55,8 +59,22 @@
         <div id="opt3" class="box">C</div>
         <div id="opt4" class="box">D</div>
         -->
-    </div>
 
+            <div class="myFooter">
+                <ul class="pagination">
+                    <li class="correctAns disabled"><a href="#">1</a></li>
+                    <li class="wrongAns disabled"><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- END: page container -->
     <!-- Coding End -->
 
     <script src="js/bootstrap.min.js"></script>
