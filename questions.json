@@ -1,12 +1,18 @@
-[{
+[
+    {
         "questionString": "A, B, C eller D?",
         "questionAnswers": ["A", "B", "C", "D"],
         "correctAnswer": 3
 },
-
     {
         "questionString": "1, 2, 3, eller 4?",
         "questionAnswers": ["1", "2", "3", "4"],
         "correctAnswer": 1
 
-}]
+},
+    {
+        "questionString": "Favvo dog?",
+        "questionAnswers": ["Louie", "Lilo", "Lakris"],
+        "correctAnswer": 2
+}
+]
