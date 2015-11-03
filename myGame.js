@@ -19,7 +19,7 @@ var myTime;
 var goToNextQ = true;
 
 // TODO: 
-// - Still having problems with timing of questions
+// - Still having problems with timing of questions/answers
 // - need to do function documentation
 // - Put all functions in .ready so that they aren't global and conflict with other future javascript files
 
