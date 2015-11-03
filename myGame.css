@@ -86,3 +86,7 @@ body {
 .pagination>li.wrongAns>a {
     background-color: palevioletred!important;
 }
+
+.container {
+    margin-top: 10px;
+}

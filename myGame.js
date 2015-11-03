@@ -13,40 +13,53 @@
 //        }]
 
 var qObjArr;
-
 var qObj;
-
 var pointsCorrect = 0;
 var myTime;
-var myJson;
+var goToNextQ = true;
+
+// TODO: 
+// - Still having problems with timing of questions
+// - need to do function documentation
+// - Put all functions in .ready so that they aren't global and conflict with other future javascript files
+
 
 $(document).ready(function () {
-    //console.log(qObjArr);
     getQuestions();
-
-    //while (qObjArr.length) {
-    //console.log(qObjArr);
-
 })
 
 function getQuestions() {
-    $.getJSON("questions.json", function (data) {
-        qObjArr = data;
-        qObj = qObjArr[0];
-        showQuestion(qObj);
-        console.log(qObjArr);
+    $.ajax({
+        url: 'questions.json',
+        type: 'get',
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            qObjArr = data; // sets the returning data to the global var qObjArr
+            // From: https://learn.jquery.com/ajax/
+            //  Because the request is asynchronous, the rest of your code continues to execute while the request is being processed, so it's imperative that a callback be used to handle the response.
+        },
+        async: false // a really bad call here, but I can't get around it atm
     });
+
+    qObj = qObjArr.shift();
+    showQuestion(qObj);
 }
+
 
 // creates the HTML for the question
 function showQuestion(dataObj) {
+    goToNextQ = false;
+
+    // first part is debugging code that tells me which function I am in...
+    console.log(arguments.callee.toString().match(/function ([^\(]+)/)[1] + ": goToNextQ is set to " + goToNextQ);
+
     // print out the question itself
     $("#questionText").html(dataObj.questionString);
 
-    // Create the multiple choice options html
-    var length = dataObj.questionAnswers.length;
+    $("#options").html(""); //clearing out any old options still left
 
-    for (i = 0; i < length; i++) {
+    for (i = 0; i < dataObj.questionAnswers.length; i++) {
 
         // creates for each possible answer: <div id="optX" class="box">Answer</div>
         var optionsHtml = document.createElement("div");
@@ -54,10 +67,9 @@ function showQuestion(dataObj) {
         optionsHtml.setAttribute("class", "box");
         optionsHtml.setAttribute("id", "opt" + (i + 1));
         $("#options").append(optionsHtml);
-
         $("#options").append("\n"); // seems to keep the boxes from touching each other
 
-        // bind a click to something
+        // bind a click to the option
         $("#opt" + (i + 1)).on("click", fadeBoxes);
     }
 
@@ -72,6 +84,9 @@ function countdown() {
 
 // fade all the boxes except the one you clicked on
 function fadeBoxes(e) {
+    // first part is debugging code that tells me which function I am in...
+    console.log(arguments.callee.toString().match(/function ([^\(]+)/)[1] + ": goToNextQ is set to " + goToNextQ);
+
     clearTimeout(myTime); // stop the question timer
 
     var length = qObj.questionAnswers.length;
@@ -82,14 +97,18 @@ function fadeBoxes(e) {
         }
     };
 
-    setTimeout(showCorrectAns, 3000, e);
+    myTime = setTimeout(showCorrectAns, 3000, e);
 }
 
 function showCorrectAns(e) {
+    // first part is debugging code that tells me which function I am in...
+    console.log("BEGIN: " + arguments.callee.toString().match(/function ([^\(]+)/)[1] + ": goToNextQ is set to " + goToNextQ);
 
     try {
         if (e.target.id == ("opt" + qObj.correctAnswer)) { //should really use a try/catch here - the user may not have chosen anything
-            pointsCorrect++;
+            if (!goToNextQ) {
+                pointsCorrect++;
+            }
         }
     } catch (err) {} //the user may never have clicked anything
 
@@ -112,5 +131,19 @@ function showCorrectAns(e) {
     });
     $("#opt" + qObj.correctAnswer).fadeTo(800, 1);
 
-    console.log("Points: " + pointsCorrect)
+    console.log("Points: " + pointsCorrect);
+
+    goToNextQ = true;
+
+    // first part is debugging code that tells me which function I am in...
+    console.log("BEGIN: " + arguments.callee.toString().match(/function ([^\(]+)/)[1] + ": goToNextQ is set to " + goToNextQ);
+
+    if (qObjArr.length) {
+        qObj = qObjArr.shift();
+        showQuestion(qObj);
+    } else {
+        console.log("----- END OF GAME -----")
+    }
+
+    myTime = setTimeout(showCorrectAns, 3000);
 }
